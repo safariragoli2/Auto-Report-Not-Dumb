@@ -1,4 +1,5 @@
 ---@diagnostic disable: unused-local
+---@diagnostic disable: undefined-global
 
 setfflag("AbuseReportScreenshotPercentage", 0)
 setfflag("DFFlagAbuseReportScreenshot", "False")
@@ -19,8 +20,8 @@ NotificationFrame.BackgroundColor3 = Color3.new(0,0,0)
 NotificationFrame.BackgroundTransparency = 0.85
 NotificationFrame.Size = UDim2.fromOffset(350,450)
 
-function Report(plr, ctx)
-    Players:ReportAbuse(plr, "Dating", string.format("said \"%s\" which is inappropriate", ctx))
+function Report(plr, ctx, abusetype)
+    Players:ReportAbuse(plr, abusetype, string.format("said \"%s\" which is inappropriate", ctx))
 end
 
 function NotifyAboutReport(plr, ctx, parent)
@@ -39,9 +40,11 @@ end
 
 function TrackPlayerChat(player)
     player.Chatted:Connect(function(message)
-        for _,word in pairs(Dictionary) do
-            if string.match(message, word) then
-                Report(player, message)
+        for _,entry in pairs(Dictionary) do
+            local word = string.split(entry, ",")
+
+            if string.match(message, word[1]) then
+                Report(player, message, word[2])
                 spawn(function()
                     NotifyAboutReport(player.Name, message, NotificationFrame)
                 end)
