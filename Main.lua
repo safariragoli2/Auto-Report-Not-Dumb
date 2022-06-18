@@ -9,22 +9,28 @@ local Players = game:GetService("Players")
 
 local Dictionary = loadstring(game:HttpGet("https://raw.githubusercontent.com/safariragoli2/Auto-Report-Not-Dumb/main/Dictionary.lua"))()
 
-local PlayersTracking = {}
+local EnableAutoReport = false
 
 local NotificationGui = Instance.new("ScreenGui", CoreGui)
-local NotificationFrame = Instance.new("Frame", NotificationGui)
+local MainFrame = Instance.new("Frame", NotificationGui)
+local NotificationFrame = Instance.new("Frame", MainFrame)
+local EnableButton = Instance.new("TextButton", MainFrame)
 local UIListLayout = Instance.new("UIListLayout", NotificationFrame)
-NotificationFrame.AnchorPoint = Vector2.new(0.5,0.05)
-NotificationFrame.Position = UDim2.fromScale(0.5,0.05)
+MainFrame.AnchorPoint = Vector2.new(0.5,0.05)
+MainFrame.Position = UDim2.fromScale(0.5,0.05)
+MainFrame.BackgroundColor3 = Color3.new(0,0,0)
+MainFrame.BackgroundTransparency = 0.85
+MainFrame.Size = UDim2.fromOffset(350,450)
+
 NotificationFrame.BackgroundColor3 = Color3.new(0,0,0)
 NotificationFrame.BackgroundTransparency = 0.85
-NotificationFrame.Size = UDim2.fromOffset(350,450)
+NotificationFrame.Size = UDim2.fromScale(1,1)
 
 function Report(plr, ctx, abusetype)
     Players:ReportAbuse(plr, abusetype, string.format("said \"%s\" which is inappropriate", ctx))
 end
 
-function NotifyAboutReport(plr, ctx, parent)
+function NotifyAboutReport(plr, ctx, abusetype, parent)
     local Notification = Instance.new("TextLabel", parent)
     Notification.TextSize = 16
     Notification.TextWrapped = true
@@ -33,20 +39,20 @@ function NotifyAboutReport(plr, ctx, parent)
     Notification.TextColor3 = Color3.new(1,1,1)
     Notification.TextStrokeTransparency = 0
     Notification.Size = UDim2.new(1,0,0,50)
-    Notification.Text = "Reported "..plr.." for saying '"..ctx.."'"
+    Notification.Text = "Reported "..plr.." for saying '"..ctx.."', because it counted as '"..abusetype.."'."
     wait(3)
     Notification:Destroy()
 end
 
 function TrackPlayerChat(player)
-    player.Chatted:Connect(function(message)
-        for _,entry in pairs(Dictionary) do
-            local word = string.split(entry, ",")
+    if player == Players.LocalPlayer then return end
 
-            if string.match(message, word[1]) then
-                Report(player, message, word[2])
+    player.Chatted:Connect(function(message)
+        for word,abusetype in pairs(Dictionary) do
+            if string.match(message, word) then
+                Report(player, message, abusetype)
                 spawn(function()
-                    NotifyAboutReport(player.Name, message, NotificationFrame)
+                    NotifyAboutReport(player.Name, message, abusetype, NotificationFrame)
                 end)
             end
         end
