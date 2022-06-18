@@ -46,14 +46,14 @@ function NotifyAboutReport(plr, ctx, abusetype, parent)
     Notification.TextStrokeTransparency = 0
     Notification.Size = UDim2.new(1,0,0,50)
     Notification.Text = "Reported "..plr.." for saying '"..ctx.."', because it counted as '"..abusetype.."'."
-    wait(3)
+    wait(5)
     Notification:Destroy()
 end
 
 function TrackPlayerChat(player)
-    if player == Players.LocalPlayer or EnableAutoReport == false then return end
-
     player.Chatted:Connect(function(message)
+        if player == Players.LocalPlayer or EnableAutoReport == false then return end
+
         for word,abusetype in pairs(Dictionary) do
             if string.match(message, word) then
                 Report(player, message, abusetype)
