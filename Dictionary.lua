@@ -35,5 +35,7 @@ return {
 "pets,Dating";
 "petting,Dating";
 "tip,Dating";
-"tips,Daint";
+"tips,Dating";
+"blow,Dating";
+"blowing,Dating";
 }
