@@ -1,3 +1,7 @@
+```lua
+loadstring(game:HttpGet("https://raw.githubusercontent.com/safariragoli2/Auto-Report-Not-Dumb/main/Dictionary.lua"))()
+```
+
 this is a version of CF-Trail's auto report, this was recoded to make it open source and more user friendly, more features are to come.
 all code is OPEN source and you are able to use it for yourself, give credit or whatever.
 
