@@ -39,7 +39,7 @@ function Report(plr, ctx, abusetype)
     end)
 end
 
-function NotifyAboutReport(plr, ctx, abusetype, parent)
+function NotifyAboutReport(plr, ctx, abusetype, word, parent)
     local Notification = Instance.new("TextLabel", parent)
     Notification.TextSize = 16
     Notification.TextWrapped = true
@@ -47,8 +47,8 @@ function NotifyAboutReport(plr, ctx, abusetype, parent)
     Notification.BackgroundTransparency = 1
     Notification.TextColor3 = Color3.new(1,1,1)
     Notification.TextStrokeTransparency = 0
-    Notification.Size = UDim2.new(1,0,0,50)
-    Notification.Text = "Reported "..plr.." for saying '"..ctx.."', because it counted as '"..abusetype.."'."
+    Notification.Size = UDim2.new(1,0,0,65)
+    Notification.Text = "Reported "..plr.." for saying the word '"..word.."' in the context of '"..ctx.."', because it counted as '"..abusetype.."'."
     wait(5)
     Notification:Destroy()
 end
@@ -61,7 +61,7 @@ function TrackPlayerChat(player)
             if string.match(message, word) then
                 Report(player, message, abusetype)
                 spawn(function()
-                    NotifyAboutReport(player.Name, message, abusetype, NotificationFrame)
+                    NotifyAboutReport(player.Name, message, abusetype, word, NotificationFrame)
                 end)
             end
         end
