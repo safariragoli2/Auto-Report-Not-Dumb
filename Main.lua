@@ -56,13 +56,15 @@ end
 function TrackPlayerChat(player)
     player.Chatted:Connect(function(message)
         if player == Players.LocalPlayer or EnableAutoReport == false then return end
-
+        
         for word,abusetype in pairs(Dictionary) do
-            if string.match(message, word) then
-                Report(player, message, abusetype)
-                spawn(function()
-                    NotifyAboutReport(player.Name, message, abusetype, word, NotificationFrame)
-                end)
+            for seperateword in string.gmatch(message, "%w+") do
+                if seperateword == word then
+                    Report(player, message, abusetype)
+                    spawn(function()
+                        NotifyAboutReport(player.Name, message, abusetype, word, NotificationFrame)
+                    end)
+                end
             end
         end
     end)
