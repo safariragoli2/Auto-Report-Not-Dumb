@@ -58,7 +58,7 @@ function TrackPlayerChat(player)
         if player == Players.LocalPlayer or EnableAutoReport == false then return end
 
         for word,abusetype in pairs(Dictionary) do
-            if string.match(" "..message.." ", word) then
+            if string.match(message, word) then
                 Report(player, message, abusetype)
                 spawn(function()
                     NotifyAboutReport(player.Name, message, abusetype, word, NotificationFrame)
