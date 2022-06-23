@@ -33,7 +33,10 @@ EnableButton.Font = Enum.Font.ArialBold
 EnableButton.Text = "Enable Auto-Report"
 
 function Report(plr, ctx, abusetype)
-    Players:ReportAbuse(plr, abusetype, string.format("said \"%s\" which is inappropriate", ctx))
+    spawn(function()
+        wait(Random.new():NextNumber(0.1,2))
+        Players:ReportAbuse(plr, abusetype, string.format("said \"%s\" which is inappropriate", ctx))
+    end)
 end
 
 function NotifyAboutReport(plr, ctx, abusetype, parent)
