@@ -49,7 +49,7 @@ function NotifyAboutReport(plr, ctx, abusetype, word, parent)
     Notification.TextStrokeTransparency = 0
     Notification.Size = UDim2.new(1,0,0,65)
     Notification.Text = "Reported "..plr.." for saying the word '"..word.."' in the context of '"..ctx.."', because it counted as '"..abusetype.."'."
-    wait(5)
+    wait(8)
     Notification:Destroy()
 end
 
