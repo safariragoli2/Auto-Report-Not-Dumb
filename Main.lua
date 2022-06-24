@@ -12,12 +12,21 @@ local Dictionary = loadstring(game:HttpGet("https://raw.githubusercontent.com/sa
 local EnableAutoReport = false
 
 local NotificationGui = Instance.new("ScreenGui", CoreGui)
-local MainFrame = Instance.new("Frame", NotificationGui)
+local DragFrame = Instance.new("TextButton", NotificationGui)
+local MainFrame = Instance.new("Frame", DragFrame)
 local NotificationFrame = Instance.new("Frame", MainFrame)
 local EnableButton = Instance.new("TextButton", MainFrame)
 local UIListLayout = Instance.new("UIListLayout", NotificationFrame)
-MainFrame.AnchorPoint = Vector2.new(0.5,0.05)
-MainFrame.Position = UDim2.fromScale(0.5,0.05)
+DragFrame.AnchorPoint = Vector2.new(0.5,0.05)
+DragFrame.Position = UDim2.fromScale(0.5,0.05)
+DragFrame.BackgroundColor3 = Color3.new(1,1,1)
+DragFrame.Size = UDim2.fromOffset(350,25)
+DragFrame.Text = "Auto-Reporter"
+DragFrame.TextSize = 15
+DragFrame.Font = Enum.Font.ArialBold
+DragFrame.Draggable = true
+
+MainFrame.Position = UDim2.fromScale(0,1)
 MainFrame.BackgroundTransparency = 1
 MainFrame.Size = UDim2.fromOffset(350,450)
 
@@ -28,6 +37,7 @@ NotificationFrame.Size = UDim2.fromScale(1,1)
 EnableButton.AnchorPoint = Vector2.new(0,1)
 EnableButton.Position = UDim2.fromScale(0,1)
 EnableButton.Size = UDim2.new(1,0,0,50)
+EnableButton.BackgroundColor3 = Color3.new(1,1,1)
 EnableButton.TextSize = 25
 EnableButton.Font = Enum.Font.ArialBold
 EnableButton.Text = "Enable Auto-Report"
@@ -49,7 +59,7 @@ function NotifyAboutReport(plr, ctx, abusetype, word, parent)
     Notification.TextStrokeTransparency = 0
     Notification.Size = UDim2.new(1,0,0,65)
     Notification.Text = "Reported "..plr.." for saying the word '"..word.."' in the context of '"..ctx.."', because it counted as '"..abusetype.."'."
-    wait(60)
+    wait(8)
     Notification:Destroy()
 end
 
