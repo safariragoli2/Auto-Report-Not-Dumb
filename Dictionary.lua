@@ -40,4 +40,5 @@ return {
     ["blowing"] = "Dating";
     ["im 13"] = "Personal Question";
     ["cute"] = "Dating";
+    ["shorty"] = "Dating";
 }    
