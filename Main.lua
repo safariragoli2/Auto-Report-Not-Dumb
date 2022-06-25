@@ -45,7 +45,7 @@ EnableButton.Text = "Enable Auto-Report"
 function Report(plr, ctx, abusetype)
     spawn(function()
         wait(Random.new():NextNumber(0.1,2))
-        Players:ReportAbuse(plr, abusetype, string.format("said \"%s\" which is inappropriate", ctx))
+        Players:ReportAbuse(plr, abusetype, string.format("said \"%s\" which is %s", ctx, string.lower(abusetype)))
     end)
 end
 
