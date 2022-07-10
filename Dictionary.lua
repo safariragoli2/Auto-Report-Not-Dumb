@@ -1,6 +1,9 @@
 return {
     ["uwu"] = "Dating";
     ["owo"] = "Dating";
+    ["fluff"] = "Dating";
+    ["fluffy"] = "Dating";
+    ["fluffs"] = "Dating";
     ["touches"] = "Dating";
     ["touch"] = "Dating";
     ["touching"] = "Dating";
