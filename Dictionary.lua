@@ -10,6 +10,7 @@ return {
     ["hugs"] = "Dating";
     ["hug"] = "Dating";
     ["hugging"] = "Dating";
+    ["love"] = "Dating";
     ["bulge"] = "Dating";
     ["cord"] = "Offsite Links";
     ["gay"] = "Bullying";
